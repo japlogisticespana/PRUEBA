@@ -10,13 +10,13 @@ UMBRAL        = 1.5   # % mínimo de movimiento para alertar
 TOP_N         = 20    # cuántos pares vigilar
 INTERVALO_SEG = 60    # cada cuántos segundos revisa
 
-exchange = ccxt.binance()
+exchange = ccxt.bybit()
 
 def obtener_top_pares():
     tickers = exchange.fetch_tickers()
     usdt = {
         k: v for k, v in tickers.items()
-        if k.endswith("/USDT") and v.get("quoteVolume")
+       if k.endswith("/USDT:USDT") == False and k.endswith("/USDT") and v.get("quoteVolume")
     }
     ordenados = sorted(usdt.items(), key=lambda x: x[1]["quoteVolume"], reverse=True)
     return [par for par, _ in ordenados[:TOP_N]]
