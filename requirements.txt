@@ -1,2 +1,2 @@
-ccxt
+requests
 python-telegram-bot
